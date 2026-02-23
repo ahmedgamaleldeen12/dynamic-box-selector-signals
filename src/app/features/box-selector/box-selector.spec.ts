@@ -1,23 +1,26 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { BoxSelector } from './box-selector';
 
 describe('BoxSelector', () => {
-  let component: BoxSelector;
-  let fixture: ComponentFixture<BoxSelector>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BoxSelector]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(BoxSelector);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
+      imports: [BoxSelector],
+    }).compileComponents();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const fixture = TestBed.createComponent(BoxSelector);
+    fixture.detectChanges();
+    expect(fixture.componentInstance).toBeTruthy();
+  });
+
+  it('should render child components', () => {
+    const fixture = TestBed.createComponent(BoxSelector);
+    fixture.detectChanges();
+
+    const native = fixture.nativeElement;
+    expect(native.querySelector('app-selection-summary')).toBeTruthy();
+    expect(native.querySelector('app-box-list')).toBeTruthy();
+    expect(native.querySelector('app-option-selector')).toBeTruthy();
   });
 });
